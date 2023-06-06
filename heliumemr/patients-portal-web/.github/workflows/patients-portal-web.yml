@@ -1,0 +1,210 @@
+name: heliumemr/patients-portal-web
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+env:
+  DOCKER_PASSWORD: "${{ secrets.DOCKER_PASSWORD }}"
+  DOCKER_USER: onemed
+jobs:
+  install-dependencies:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:13.8
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: node --version
+    - run: yarn --version
+    - run: yarn install
+  test:
+    needs: install-dependencies
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:13.8
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: yarn install
+    - run: yarn test
+  lint:
+    needs: install-dependencies
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:13.8
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: yarn install
+    - run: yarn lint:vue
+  build-manual:
+    needs:
+    - test
+    - lint
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:latest
+    if: github.event_name == 'workflow_dispatch'
+    timeout-minutes: 60
+    continue-on-error: true
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+      DOCKER_DRIVER: overlay2
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/patient-portal-web:${{ github.sha }}" .
+    - run: docker tag "1med/patient-portal-web:${{ github.sha }}" 1med/patient-portal-web:latest
+    - run: docker push "1med/patient-portal-web:${{ github.sha }}"
+    - run: docker push 1med/patient-portal-web:latest
+    - run: docker image save -o patient-portal-web.tar "1med/patient-portal-web:${{ github.sha }}"
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: patient-portal-web.tar
+  build-auto:
+    needs:
+    - test
+    - lint
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:latest
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+      DOCKER_DRIVER: overlay2
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/patient-portal-web:${{ github.sha }}" .
+    - run: docker tag "1med/patient-portal-web:${{ github.sha }}" 1med/patient-portal-web:latest
+    - run: docker push "1med/patient-portal-web:${{ github.sha }}"
+    - run: docker push 1med/patient-portal-web:latest
+    - run: docker image save -o patient-portal-web.tar "1med/patient-portal-web:${{ github.sha }}"
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: patient-portal-web.tar
+  deploy-manual:
+    needs:
+    - build-manual
+    - build-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    continue-on-error: true
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config use-context gitlab-deploy
+    - run: kubectl -n patient-portal-web-stg set image deployment patient-portal-web-stg patient-portal-web-stg="1med/patient-portal-web:${{ github.sha }}" --record
+  deploy-auto:
+    needs:
+    - build-manual
+    - build-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.ref == 'refs/heads/master'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config use-context gitlab-deploy
+    - run: kubectl -n patient-portal-web-stg set image deployment patient-portal-web-stg patient-portal-web-stg="1med/patient-portal-web:${{ github.sha }}" --record

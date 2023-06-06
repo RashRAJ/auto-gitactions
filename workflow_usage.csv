@@ -1,0 +1,70 @@
+Pipeline,Action,File path
+heliumemr/consolidated-heliumhealth-web,actions/checkout@v3.5.0,output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+heliumemr/consolidated-heliumhealth-web,actions/cache@v3.3.1,output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+heliumemr/emr-3-0,actions/checkout@v3.5.0,output/heliumemr/emr-3-0/.github/workflows/emr-3-0.yml
+heliumemr/consolidated-emr-api,actions/checkout@v3.5.0,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/consolidated-emr-api,actions/cache@v3.3.1,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/consolidated-emr-api,actions/upload-artifact@v3.1.1,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/consolidated-emr-api,actions/download-artifact@v3.0.1,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/api,actions/checkout@v3.5.0,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/api,actions/cache@v3.3.1,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/api,actions/upload-artifact@v3.1.1,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/api,actions/download-artifact@v3.0.1,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/admin_api,actions/checkout@v3.5.0,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin_api,actions/cache@v3.3.1,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin_api,actions/upload-artifact@v3.1.1,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin_api,actions/download-artifact@v3.0.1,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin-mega,actions/checkout@v3.5.0,output/heliumemr/admin-mega/.github/workflows/admin-mega.yml
+heliumemr/patients-portal-web,actions/checkout@v3.5.0,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/patients-portal-web,actions/cache@v3.3.1,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/patients-portal-web,actions/upload-artifact@v3.1.1,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/patients-portal-web,actions/download-artifact@v3.0.1,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/pdf-generator,actions/checkout@v3.5.0,output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/pdf-generator,actions/upload-artifact@v3.1.1,output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/pdf-generator,actions/download-artifact@v3.0.1,output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/claim-submission-tool-web,actions/checkout@v3.5.0,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/claim-submission-tool-web,actions/cache@v3.3.1,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/claim-submission-tool-web,actions/upload-artifact@v3.1.1,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/claim-submission-tool-web,actions/download-artifact@v3.0.1,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/helium-android,actions/checkout@v3.5.0,output/heliumemr/helium-android/.github/workflows/helium-android.yml
+heliumemr/helium-android,actions/cache@v3.3.1,output/heliumemr/helium-android/.github/workflows/helium-android.yml
+heliumemr/helium-android,actions/upload-artifact@v3.1.1,output/heliumemr/helium-android/.github/workflows/helium-android.yml
+heliumemr/helium-ios,actions/checkout@v3.5.0,output/heliumemr/helium-ios/.github/workflows/helium-ios.yml
+heliumemr/helium-ios,actions/upload-artifact@v3.1.1,output/heliumemr/helium-ios/.github/workflows/helium-ios.yml
+heliumemr/helium-ios,actions/download-artifact@v3.0.1,output/heliumemr/helium-ios/.github/workflows/helium-ios.yml
+heliumemr/claim-submission-tool,actions/checkout@v3.5.0,output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+heliumemr/claim-submission-tool,actions/upload-artifact@v3.1.1,output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+heliumemr/claim-submission-tool,actions/download-artifact@v3.0.1,output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+heliumemr/universe,actions/checkout@v3.5.0,output/heliumemr/universe/.github/workflows/universe.yml
+heliumemr/universe,actions/upload-artifact@v3.1.1,output/heliumemr/universe/.github/workflows/universe.yml
+heliumemr/universe,actions/download-artifact@v3.0.1,output/heliumemr/universe/.github/workflows/universe.yml
+
+Pipeline,Secret,File path
+heliumemr/emr-3-0,${{ secrets.DOCKER_PASSWORD }},output/heliumemr/emr-3-0/.github/workflows/emr-3-0.yml
+heliumemr/patients-portal-web,${{ secrets.DOCKER_PASSWORD }},output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/pdf-generator,${{ secrets.DOCKER_PASSWORD }},output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/claim-submission-tool-web,${{ secrets.DOCKER_PASSWORD }},output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+
+Pipeline,Runner,File path
+heliumemr/consolidated-heliumhealth-web,k8s,output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+heliumemr/consolidated-heliumhealth-web,privileged,output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+heliumemr/emr-3-0,k8s,output/heliumemr/emr-3-0/.github/workflows/emr-3-0.yml
+heliumemr/consolidated-emr-api,k8s,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/consolidated-emr-api,privileged,output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+heliumemr/api,k8s,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/api,privileged,output/heliumemr/api/.github/workflows/api.yml
+heliumemr/admin_api,k8s,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin_api,privileged,output/heliumemr/admin_api/.github/workflows/admin_api.yml
+heliumemr/admin-mega,privileged,output/heliumemr/admin-mega/.github/workflows/admin-mega.yml
+heliumemr/admin-mega,k8s,output/heliumemr/admin-mega/.github/workflows/admin-mega.yml
+heliumemr/patients-portal-web,k8s,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/patients-portal-web,privileged,output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+heliumemr/pdf-generator,privileged,output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/pdf-generator,k8s,output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+heliumemr/claim-submission-tool-web,k8s,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/claim-submission-tool-web,privileged,output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+heliumemr/helium-android,k8s,output/heliumemr/helium-android/.github/workflows/helium-android.yml
+heliumemr/helium-ios,vm-xcode11.3.1,output/heliumemr/helium-ios/.github/workflows/helium-ios.yml
+heliumemr/claim-submission-tool,k8s,output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+heliumemr/claim-submission-tool,privileged,output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+heliumemr/universe,k8s,output/heliumemr/universe/.github/workflows/universe.yml

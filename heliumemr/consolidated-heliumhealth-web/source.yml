@@ -1,0 +1,150 @@
+stages:
+  - dependencies
+  - quality
+  - tests
+  - build
+  - deploy
+  - deploy-aks
+  - deploy-preprod
+
+variables:
+  NODE_OPTIONS: --max_old_space_size=4096
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+.node: &node-common
+  image: node:11.13
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+      - .npm
+      - cache/Cypress
+    policy: pull-push
+  tags:
+    - k8s
+
+dependencies:compile:
+  <<: *node-common
+  stage: dependencies
+  script:
+    - node --version
+    - yarn --version
+    - yarn install
+
+quality:lint:
+  <<: *node-common
+  stage: quality
+  script:
+    - yarn install
+    - yarn lint:vue
+
+tests:unit:
+  <<: *node-common
+  stage: tests
+  script:
+    - yarn install
+    - yarn test
+
+tests:integration:
+  image: cypress/browsers:node11.13.0-chrome73
+  stage: tests
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+      - .npm
+      - cache/Cypress
+    policy: pull-push
+  script:
+    - yarn install
+    - yarn init:vars
+    - yarn start-server-and-test start:dev:silent http-get://localhost:3000 test:cypress:silent
+  tags:
+    - k8s
+  when: manual
+
+.build-common:
+  image: docker:latest
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - docker version
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/consolidated-heliumhealth-web:${CI_COMMIT_SHORT_SHA}" .
+    - docker push "1med/consolidated-heliumhealth-web:${CI_COMMIT_SHORT_SHA}"
+  tags:
+    - privileged
+
+build:manual:
+  extends: .build-common
+  except:
+    - master
+  stage: build
+  allow_failure: true
+  when: manual
+
+deploy-staging:manual:
+  image: lwolf/kubectl_deployer:latest
+  except:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n consolidated-heliumhealth-web-stg set image deployment consolidated-heliumhealth-web-stg consolidated-heliumhealth-web-stg="1med/consolidated-heliumhealth-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  allow_failure: true
+  when: manual
+
+build:auto:
+  only:
+    - master
+  stage: build
+  extends: .build-common
+
+deploy-staging:auto:
+  image: lwolf/kubectl_deployer:latest
+  only:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n consolidated-heliumhealth-web-stg set image deployment consolidated-heliumhealth-web-stg consolidated-heliumhealth-web-stg="1med/consolidated-heliumhealth-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+
+
+aks-deploy-staging:auto:
+  image: lwolf/kubectl_deployer:latest
+  only:
+    - master
+  stage: deploy-aks
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:aks-agent
+    - kubectl -n consolidated-emr-staging set image deployment consolidated-emr-staging consolidated-emr-staging="1med/consolidated-heliumhealth-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+
+deploy-preprod:manual:
+  image: lwolf/kubectl_deployer:latest
+  stage: deploy-preprod
+  only:
+    - master
+  environment:
+      name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n consolidated-heliumhealth-web-preprod set image deployment consolidated-heliumhealth-web-preprod consolidated-heliumhealth-web-preprod="onemed/consolidated-heliumhealth_web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  when: manual
+

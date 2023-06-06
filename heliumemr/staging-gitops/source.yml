@@ -1,0 +1,75 @@
+name: Create New Secret
+on:
+  workflow_dispatch:
+    inputs:
+      public_key:
+        required: true
+        type: string
+        description: Public Key encryption
+      workload:
+        required: true
+        type: string
+        description: New secret name
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  create-new-secret:
+    name: Create new secret - ${{ inputs.workload }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup SOPS
+        run: |
+          curl -Lo sops "https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64"
+          chmod u+x ./sops
+          mv sops /usr/local/bin/
+      # Pull Secrets from GSM
+      - id: gcp-auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: '${{ secrets.SOPS_KEY }}'
+          create_credentials_file: true
+      
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+
+      - name: Setup Kubectl via gcloud
+        run: |
+          echo "Installing kubectl"
+          gcloud components install kubectl
+          echo "Generating ${{ inputs.workload }} secret"
+          kubectl create secret generic env-${{ inputs.workload }} --dry-run=client -oyaml > staging/secrets/${{ inputs.workload }}.secret.yaml
+          echo "stringData: null" >> staging/secrets/${{ inputs.workload }}.secret.yaml
+      - name: Create new Branch for PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git checkout -b new-secret-${{ inputs.workload }}-by-${{ github.actor }}-${{ github.run_id }}
+          cd staging/secrets
+          sops -e -i ${{ inputs.workload }}.secret.yaml
+          sops -r -i --add-age ${{ inputs.public_key }} ${{ inputs.workload }}.secret.yaml
+          git config --global user.name '${{ github.actor }}'
+          git config --global user.email '${{ github.actor }}@users.noreply.github.com'
+          git add ${{ inputs.workload }}.secret.yaml
+          git commit -m "chore(${{ inputs.workload }}): add ${{ github.actor }} personal key"
+          git push -u origin new-secret-${{ inputs.workload }}-by-${{ github.actor }}-${{ github.run_id }}
+          # create PR
+          gh pr create -a '${{ github.actor }}' --draft --fill
+
+
+
+
+# argocd-rollout:
+#     image:  argoproj/argocd:v2.4.14
+#     stage: deploy
+#     script:
+#       - argocd login "argo.onemedops.com" --insecure --username "admin" --password "password" 
+#       - argocd app set courier-dev -p image.tag=latest
+#     only:
+#       - main
+      

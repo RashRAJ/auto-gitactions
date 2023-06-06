@@ -1,0 +1,90 @@
+image: appunite/elixir-ci:1.7.1
+services:
+  - postgres
+
+stages:
+  - compile
+  - test
+  - build
+  - deploy
+
+before_script:
+  - elixir --version
+  - mix --version
+  - mix do local.hex --force, local.rebar --force
+  - mix deps.get
+cache:
+  key: "$CI_PIPELINE_ID"
+  untracked: true
+variables:
+  MIX_ENV: test
+
+# TASKS
+compile:
+  stage: compile
+  script:
+    - mix compile
+  tags:
+    - k8s
+
+## Test
+test:exunit:
+  stage: test
+  script:
+    - mix ecto.create
+    - mix test --cover --color
+  tags:
+    - k8s
+  artifacts:
+    paths:
+      - cover/
+
+test:credo:
+  stage: test
+  script:
+    - mix credo
+  tags:
+    - k8s
+
+test:dialyxir:
+  stage: test
+  script:
+    - mix dialyzer
+  tags:
+    - k8s
+  only:
+    - manual
+  allow_failure: true
+
+## Build
+build:staging:
+  stage: build
+  variables:
+    MIX_ENV: prod
+    APP_NAME: universe
+  script:
+    - mix release --env=prod
+    - cp "_build/$MIX_ENV/rel/$APP_NAME/releases/$(git describe --always)/$APP_NAME.tar.gz" universe.tar.gz
+  tags:
+    - k8s
+  only:
+    - master
+  artifacts:
+    paths:
+      - universe.tar.gz
+
+## Deploy
+deploy:staging:
+  image: garland/aws-cli-docker:latest
+  stage: deploy
+  environment: staging
+  before_script:
+    - "true"
+  script:
+    - aws s3 cp universe.tar.gz $AWS_S3_LOCATION
+  tags:
+    - k8s
+  only:
+    - master
+  dependencies:
+    - build:staging

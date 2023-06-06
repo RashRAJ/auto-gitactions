@@ -1,0 +1,124 @@
+name: heliumemr/helium-ios
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+env:
+  APP_STORE_CONNECT_API_KEY_ISSUER_ID: 853b5cfb-507d-42e9-9d6b-3f623644a611
+  APP_STORE_CONNECT_API_KEY_KEY_ID: Q3TW7PB5ZL
+  AUTO_CLOSE_TOKEN: 851:jJANvuFSmiGm4UIN9wJGRGIc
+  FASTLANE_PASSWORD: Nm3-B2y-S9Y-cTy1
+  FIREBASE_TOKEN: 1/BodbsF3IRy9Bi96TAk7nqjh1p-b6paY9NzVAWFTUH-6n4u8LBTFF0iZblCNBVTbO
+jobs:
+  test-unit:
+    runs-on:
+      - self-hosted
+      - vm-xcode11.3.1
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: export LANG=en_US.UTF-8
+    - run: python tools/download.py --token $AUTO_CLOSE_TOKEN --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgNn9ypEKDA
+    - run: source .keys/.env-ci
+    - run: source .keys/.keys-ci
+    - run: make restore-cache
+    - run: make bootstrap-ci
+    - run: make install-firebase-cli
+    - run: bundle exec fastlane ios test --env testing
+    - run: make store-cache
+    - uses: actions/upload-artifact@v3.1.1
+      if: always()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: |-
+          output/scan
+          coverage/
+          .scan-logs/*.log
+          helium-snapshot-tests/FailureDiffs/
+  deploy-helium_production_testflight:
+    needs: test-unit
+    runs-on:
+      - self-hosted
+      - vm-xcode11.3.1
+    if: github.ref == 'refs/heads//^release_production-.*$/'
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: export LANG=en_US.UTF-8
+    - run: python tools/download.py --token $AUTO_CLOSE_TOKEN --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgNn9ypEKDA
+    - run: source .keys/.env-ci
+    - run: source .keys/.keys-ci
+    - run: make restore-cache
+    - run: make bootstrap-ci
+    - run: make install-firebase-cli
+    - run: bundle exec fastlane ios release_testflight_helium --env production_helium
+    - uses: actions/upload-artifact@v3.1.1
+      if: always()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: ".gym-build/*.log"
+  deploy-au_production_firebase:
+    needs: test-unit
+    runs-on:
+      - self-hosted
+      - vm-xcode11.3.1
+    if: github.ref == 'refs/heads//^release_production-.*$/'
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: export LANG=en_US.UTF-8
+    - run: python tools/download.py --token $AUTO_CLOSE_TOKEN --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgNn9ypEKDA
+    - run: source .keys/.env-ci
+    - run: source .keys/.keys-ci
+    - run: make restore-cache
+    - run: make bootstrap-ci
+    - run: make install-firebase-cli
+    - run: bundle exec fastlane ios release_firebase_appunite --env production_appunite
+    - uses: actions/upload-artifact@v3.1.1
+      if: always()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: ".gym-build/*.log"
+  deploy-au_staging_firebase:
+    needs: test-unit
+    runs-on:
+      - self-hosted
+      - vm-xcode11.3.1
+    if: (github.ref == 'refs/heads//^release_staging-.*$/' || github.ref == 'refs/heads/develop')
+    timeout-minutes: 60
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: export LANG=en_US.UTF-8
+    - run: python tools/download.py --token $AUTO_CLOSE_TOKEN --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgNn9ypEKDA
+    - run: source .keys/.env-ci
+    - run: source .keys/.keys-ci
+    - run: make restore-cache
+    - run: make bootstrap-ci
+    - run: make install-firebase-cli
+    - run: bundle exec fastlane ios release_firebase_appunite --env staging_appunite
+    - uses: actions/upload-artifact@v3.1.1
+      if: always()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: ".gym-build/*.log"

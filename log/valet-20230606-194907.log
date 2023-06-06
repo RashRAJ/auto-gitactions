@@ -1,0 +1,1557 @@
+# Logfile created on 2023-06-06 19:49:07 +0000 by logger.rb/v1.5.3
+I, [2023-06-06T19:49:07.627942 #1]  INFO -- : Using GitHub Features: Defaults
+I, [2023-06-06T19:49:07.628205 #1]  INFO -- : Auditing 'https://gitlab.com/heliumemr'
+I, [2023-06-06T19:49:07.680052 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/projects
+I, [2023-06-06T19:49:10.604879 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:10.629418 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/projects?id=heliumemr&include_ancestor_groups=false&include_subgroups=false&order_by=created_at&owned=false&page=2&per_page=20&simple=false&sort=desc&starred=false&with_custom_attributes=false&with_issues_enabled=false&with_merge_requests_enabled=false&with_security_reports=false&with_shared=true
+I, [2023-06-06T19:49:12.607382 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:12.616580 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fars/pipelines?per_page=1
+I, [2023-06-06T19:49:13.480766 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:13.487111 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-iac/pipelines?per_page=1
+I, [2023-06-06T19:49:14.215613 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:14.222448 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops/pipelines?per_page=1
+I, [2023-06-06T19:49:15.022830 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:15.028092 #1]  INFO -- : Thread collection size: 4
+I, [2023-06-06T19:49:15.038031 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FHelium-Helm-Chart/pipelines?per_page=1
+I, [2023-06-06T19:49:15.038855 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops
+I, [2023-06-06T19:49:15.248348 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Flasser2-client/pipelines?per_page=1
+I, [2023-06-06T19:49:15.453703 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Flasser2/pipelines?per_page=1
+I, [2023-06-06T19:49:16.085056 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:16.104340 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops
+I, [2023-06-06T19:49:16.236346 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:16.240204 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffhir-connector/pipelines?per_page=1
+I, [2023-06-06T19:49:16.240743 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Flasser2
+I, [2023-06-06T19:49:17.074819 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:17.081115 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffile-exporter-web/pipelines?per_page=1
+I, [2023-06-06T19:49:17.101006 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:17.106190 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Flasser2
+I, [2023-06-06T19:49:17.146823 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:17.149733 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops/repository/files/.gitlab-ci.yml?ref=main
+W, [2023-06-06T19:49:17.366605 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/lasser2)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Flasser2 uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:20:in `fetch_project'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:13:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:17.918885 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:17.924053 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffile-exporter/pipelines?per_page=1
+I, [2023-06-06T19:49:18.007856 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:18.012824 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops/variables
+I, [2023-06-06T19:49:19.013443 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:19.020743 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:20.013629 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:20.015879 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:20.018239 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fstaging-gitops/pipeline_schedules
+I, [2023-06-06T19:49:20.851176 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:20.888795 #1]  WARN -- : (heliumemr/staging-gitops) - Invalid pipeline: property '/name' is invalid: error_type=oneOf
+W, [2023-06-06T19:49:20.890040 #1]  WARN -- : (heliumemr/staging-gitops) - Invalid pipeline: property '/name' is not of type: object
+W, [2023-06-06T19:49:20.892314 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/staging-gitops)
+NoMethodError: undefined method `gsub' for true:TrueClass
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:625:in `escape_json_pointer_token'
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:552:in `block in validate_object'
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:551:in `each'
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:551:in `validate_object'
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:299:in `validate_type'
+/usr/local/bundle/gems/json_schemer-0.2.24/lib/json_schemer/schema/base.rb:211:in `validate_instance'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/schema/validator.rb:29:in `each'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/schema/validator.rb:29:in `valid_config?'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/call_validation.rb:256:in `bind_call'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/call_validation.rb:256:in `validate_call'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/_methods.rb:275:in `block in _on_method_added'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:215:in `run_schema_validation'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/call_validation.rb:256:in `bind_call'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/call_validation.rb:256:in `validate_call'
+/usr/local/bundle/gems/sorbet-runtime-0.5.10648/lib/types/private/methods/_methods.rb:275:in `block in _on_method_added'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:53:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:22.618829 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:22.627405 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Faks-middleeast/pipelines?per_page=1
+I, [2023-06-06T19:49:22.628219 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffile-exporter
+W, [2023-06-06T19:49:22.865024 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/file-exporter)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Ffile-exporter uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:20:in `fetch_project'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:101:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:23.420894 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:23.425268 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web/pipelines?per_page=1
+I, [2023-06-06T19:49:24.240687 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:24.249141 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0/pipelines?per_page=1
+I, [2023-06-06T19:49:24.249636 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web
+I, [2023-06-06T19:49:25.050179 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:25.053919 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api/pipelines?per_page=1
+I, [2023-06-06T19:49:25.054368 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0
+I, [2023-06-06T19:49:25.262437 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:25.282431 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web
+I, [2023-06-06T19:49:25.834831 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:25.835033 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:25.852286 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api
+I, [2023-06-06T19:49:25.846146 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi/pipelines?per_page=1
+I, [2023-06-06T19:49:25.853095 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0
+I, [2023-06-06T19:49:26.733693 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:26.738293 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0/repository/files/.gitlab-ci.yml?ref=main
+I, [2023-06-06T19:49:26.865793 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:26.870098 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api
+I, [2023-06-06T19:49:26.905439 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:26.907878 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api/pipelines?per_page=1
+I, [2023-06-06T19:49:26.908125 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi
+I, [2023-06-06T19:49:27.797592 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:27.805639 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0/variables
+I, [2023-06-06T19:49:27.833908 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:27.841682 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:27.881247 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:27.885140 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops/pipelines?per_page=1
+I, [2023-06-06T19:49:27.952957 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:27.964363 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi
+I, [2023-06-06T19:49:28.087905 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.101646 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api/repository/files/.gitlab-ci.yml?ref=develop
+I, [2023-06-06T19:49:28.559781 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.566706 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:28.666334 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.670522 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops/pipelines?per_page=1
+I, [2023-06-06T19:49:28.727280 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.731493 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web/variables
+I, [2023-06-06T19:49:28.922372 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.927237 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi/repository/files/.gitlab-ci.yml?ref=develop
+I, [2023-06-06T19:49:28.930501 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:28.935590 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api/variables
+I, [2023-06-06T19:49:29.337890 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:29.341481 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:29.344768 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Femr-3-0/pipeline_schedules
+I, [2023-06-06T19:49:29.406555 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:29.414427 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth_web/pipelines?per_page=1
+I, [2023-06-06T19:49:29.606384 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:29.618464 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:29.653311 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega/pipelines?per_page=1
+I, [2023-06-06T19:49:29.684034 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:29.687258 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:29.751662 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:29.758763 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi/variables
+I, [2023-06-06T19:49:30.117026 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:30.157941 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api
+I, [2023-06-06T19:49:30.346433 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:30.349171 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:30.351591 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-heliumhealth-web/pipeline_schedules
+I, [2023-06-06T19:49:30.424349 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:30.426944 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:30.429512 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fconsolidated-emr-api/pipeline_schedules
+I, [2023-06-06T19:49:30.424635 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:30.435600 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin/pipelines?per_page=1
+I, [2023-06-06T19:49:30.533169 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:30.536978 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:31.143428 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:31.182439 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops
+I, [2023-06-06T19:49:31.338693 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:31.346370 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth-new/pipelines?per_page=1
+I, [2023-06-06T19:49:31.346554 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:31.401143 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops
+I, [2023-06-06T19:49:31.424682 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:31.427255 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api
+I, [2023-06-06T19:49:31.976181 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:31.987646 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops
+I, [2023-06-06T19:49:32.120460 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:32.125817 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web/pipelines?per_page=1
+I, [2023-06-06T19:49:32.337403 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:32.344761 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:32.351702 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:32.365466 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops
+I, [2023-06-06T19:49:32.549480 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:32.552769 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:32.555779 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fapi/pipeline_schedules
+I, [2023-06-06T19:49:32.795587 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:32.801585 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:32.909676 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:32.917933 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ftv-queues/pipelines?per_page=1
+I, [2023-06-06T19:49:33.128302 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:33.134458 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:33.139189 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:33.150009 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api/variables
+I, [2023-06-06T19:49:33.271718 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:33.351191 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega
+I, [2023-06-06T19:49:33.632119 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:33.634819 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator/pipelines?per_page=1
+I, [2023-06-06T19:49:33.650449 #1]  INFO -- response: Status 404
+W, [2023-06-06T19:49:33.654112 #1]  WARN -- : Resource not found
+(GET 404) Not Found: https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops/repository/files/.gitlab-ci.yml?ref=master
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/parse_response.rb:14:in `parse!'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:125:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:33.656576 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops/variables
+I, [2023-06-06T19:49:33.932889 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:33.937206 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:33.987005 #1]  INFO -- response: Status 404
+W, [2023-06-06T19:49:33.991953 #1]  WARN -- : Resource not found
+(GET 404) Not Found: https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops/repository/files/.gitlab-ci.yml?ref=master
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/parse_response.rb:14:in `parse!'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:125:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:33.997036 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops/variables
+I, [2023-06-06T19:49:34.246719 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:34.278185 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega
+I, [2023-06-06T19:49:34.549029 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:34.549391 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:34.553583 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:34.555429 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fappointments-backend/pipelines?per_page=1
+I, [2023-06-06T19:49:35.123794 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:35.127009 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:35.129900 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin_api/pipeline_schedules
+I, [2023-06-06T19:49:35.802436 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:35.806756 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED/pipelines?per_page=1
+I, [2023-06-06T19:49:35.819868 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:35.822381 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:35.823508 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fonemedical-ops/pipeline_schedules
+I, [2023-06-06T19:49:35.999612 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:36.026337 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin
+I, [2023-06-06T19:49:36.527257 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:36.535731 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android/pipelines?per_page=1
+I, [2023-06-06T19:49:36.531849 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:36.542882 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/onemedical-ops)
+Message: Unable to locate pipeline for heliumemr/onemedical-ops
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:39:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:36.551388 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web
+I, [2023-06-06T19:49:36.690708 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:36.698475 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:36.764562 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:36.771605 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin
+I, [2023-06-06T19:49:37.037169 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:37.045420 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:37.282301 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:37.289330 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios/pipelines?per_page=1
+I, [2023-06-06T19:49:37.423135 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:37.425770 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:37.428261 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FREDACTEDops/pipeline_schedules
+I, [2023-06-06T19:49:37.569736 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:37.585256 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web
+I, [2023-06-06T19:49:37.595464 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:37.636672 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:37.881284 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:37.887296 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega/variables
+I, [2023-06-06T19:49:38.064051 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:38.069189 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffortress/pipelines?per_page=1
+I, [2023-06-06T19:49:38.122963 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:38.128135 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/REDACTEDops)
+Message: Unable to locate pipeline for heliumemr/REDACTEDops
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:39:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:38.132826 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ftv-queues
+I, [2023-06-06T19:49:38.410418 #1]  INFO -- response: Status 404
+I, [2023-06-06T19:49:38.411515 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:38.415173 #1]  WARN -- : Resource not found
+(GET 404) Not Found: https://gitlab.com/api/v4/projects/heliumemr%2Fadmin/repository/files/.gitlab-ci.yml?ref=master
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/parse_response.rb:14:in `parse!'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:125:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:38.420265 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin/variables
+I, [2023-06-06T19:49:38.418552 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:38.649971 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:38.663515 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:38.805000 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:38.810572 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool/pipelines?per_page=1
+I, [2023-06-06T19:49:38.865900 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:38.877239 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ftv-queues
+W, [2023-06-06T19:49:39.089501 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/tv-queues)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Ftv-queues uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:20:in `fetch_project'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:13:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:39.100590 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:39.105337 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator
+I, [2023-06-06T19:49:39.109713 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:39.215624 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:39.220243 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web/variables
+I, [2023-06-06T19:49:39.358912 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:39.363127 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:39.365361 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin-mega/pipeline_schedules
+I, [2023-06-06T19:49:39.515786 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:39.521341 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth/pipelines?per_page=1
+I, [2023-06-06T19:49:39.805185 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:39.809487 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:39.812928 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fadmin/pipeline_schedules
+I, [2023-06-06T19:49:40.002511 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.007789 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:40.008018 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.017335 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator
+I, [2023-06-06T19:49:40.049556 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.060278 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fappointments-backend
+W, [2023-06-06T19:49:40.233791 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/appointments-backend)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Fappointments-backend uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:20:in `fetch_project'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:101:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:40.238182 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED
+I, [2023-06-06T19:49:40.254261 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.256328 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse/pipelines?per_page=1
+I, [2023-06-06T19:49:40.708713 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:40.711914 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:40.715389 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpatients-portal-web/pipeline_schedules
+I, [2023-06-06T19:49:40.895431 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.905210 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:40.974166 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:40.976725 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fimager/pipelines?per_page=1
+I, [2023-06-06T19:49:41.165232 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:41.176135 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED
+I, [2023-06-06T19:49:41.452794 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:41.486163 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android
+I, [2023-06-06T19:49:41.698040 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:41.704302 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator/variables
+I, [2023-06-06T19:49:41.722337 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:41.954326 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:41.960988 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:42.120232 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:42.124883 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/admin)
+Message: Unable to locate pipeline for heliumemr/admin
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:39:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:42.129180 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios
+I, [2023-06-06T19:49:42.280849 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:42.288296 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android
+I, [2023-06-06T19:49:42.405841 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:42.407921 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:42.735847 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:42.742187 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED/variables
+I, [2023-06-06T19:49:42.964674 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:42.974630 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios
+I, [2023-06-06T19:49:43.103463 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:43.106590 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android/repository/files/.gitlab-ci.yml?ref=develop
+I, [2023-06-06T19:49:43.248014 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:43.251290 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:43.255764 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fpdf-generator/pipeline_schedules
+I, [2023-06-06T19:49:43.622559 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:43.627173 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:43.748685 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:43.754352 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios/repository/files/.gitlab-ci.yml?ref=develop
+I, [2023-06-06T19:49:44.051333 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:44.056992 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android/variables
+I, [2023-06-06T19:49:44.327322 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:44.331539 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:44.334215 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2FclaimREDACTED/pipeline_schedules
+I, [2023-06-06T19:49:44.560273 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:44.566209 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios/variables
+I, [2023-06-06T19:49:45.076625 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:45.108506 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffortress
+I, [2023-06-06T19:49:45.264412 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:45.271564 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:45.279234 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:45.284828 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:45.953842 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:45.956450 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:45.959233 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-android/pipeline_schedules
+I, [2023-06-06T19:49:45.997056 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:46.002883 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffortress
+I, [2023-06-06T19:49:46.145618 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:46.147281 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:46.148750 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fhelium-ios/pipeline_schedules
+I, [2023-06-06T19:49:46.686848 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:46.720516 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool
+I, [2023-06-06T19:49:46.846647 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:46.853489 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Ffortress/repository/files/.gitlab-ci.yml?ref=master
+W, [2023-06-06T19:49:47.045034 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/fortress)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Ffortress/repository/files/.gitlab-ci.yml?ref=master uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:47.048388 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth
+I, [2023-06-06T19:49:47.465741 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:47.477200 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool
+I, [2023-06-06T19:49:47.790790 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:47.798427 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth
+I, [2023-06-06T19:49:47.904895 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:47.917695 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse
+I, [2023-06-06T19:49:48.231456 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:48.265495 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fimager
+I, [2023-06-06T19:49:48.266028 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:48.271267 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:48.672947 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:48.679168 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:48.774068 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:48.783406 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse
+I, [2023-06-06T19:49:49.297159 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:49.305351 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fimager
+I, [2023-06-06T19:49:49.346731 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:49.349972 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool/variables
+I, [2023-06-06T19:49:49.400726 #1]  INFO -- response: Status 404
+W, [2023-06-06T19:49:49.403845 #1]  WARN -- : Resource not found
+(GET 404) Not Found: https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth/repository/files/.gitlab-ci.yml?ref=master
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/parse_response.rb:14:in `parse!'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:125:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:49.406397 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth/variables
+I, [2023-06-06T19:49:49.633431 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:49.640991 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:50.073388 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:50.081067 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fimager/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T19:49:50.105368 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:50.108419 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:50.141462 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:50.143696 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+W, [2023-06-06T19:49:50.282694 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/imager)
+Message: Unable to verify SSL certificate. Please ensure https://gitlab.com/api/v4/projects/heliumemr%2Fimager/repository/files/.gitlab-ci.yml?ref=master uses the correct HTTP scheme or disable certificate verification with the '--no-ssl-verify' CLI option. Error: SSL_connect returned=1 errno=0 peeraddr=172.65.251.78:443 state=error: unexpected eof while reading
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `connect_nonblock'
+/usr/local/lib/ruby/3.2.0/net/protocol.rb:46:in `ssl_socket_connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1342:in `connect'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1248:in `do_start'
+/usr/local/lib/ruby/3.2.0/net/http.rb:1237:in `start'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:112:in `request_with_wrapped_block'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:102:in `perform_request'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:66:in `block in call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/adapter.rb:45:in `connection'
+/usr/local/bundle/gems/faraday-net_http-3.0.2/lib/faraday/adapter/net_http.rb:65:in `call'
+/usr/local/bundle/gems/faraday-retry-2.0.0/lib/faraday/retry/middleware.rb:148:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/response/logger.rb:23:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:286:in `fetch'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:190:in `process'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:141:in `call!'
+/usr/local/bundle/gems/faraday-http-cache-2.5.0/lib/faraday/http_cache.rb:121:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/faraday/middleware/exception_handling.rb:7:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/middleware.rb:17:in `call'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/rack_builder.rb:153:in `build_response'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:445:in `run_request'
+/usr/local/bundle/gems/faraday-2.7.2/lib/faraday/connection.rb:200:in `get'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:123:in `fetch'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/adapters/gitlab_ci/client.rb:78:in `fetch_file'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_file.rb:14:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:105:in `pipeline_attributes_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:35:in `block in call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/concerns/cli_utilities.rb:126:in `source_file_from_local_or_scm'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:34:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:50.487989 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:50.493158 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse/variables
+I, [2023-06-06T19:49:50.830537 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:50.833105 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:50.835321 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool/pipeline_schedules
+I, [2023-06-06T19:49:50.847717 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:50.850431 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:50.852514 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fheliumhealth/pipeline_schedules
+I, [2023-06-06T19:49:51.189446 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:51.194137 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T19:49:51.510401 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:49:51.575411 #1]  INFO -- response: Status 200
+W, [2023-06-06T19:49:51.577996 #1]  WARN -- : There was an error extracting the GitLab CI pipeline (heliumemr/heliumhealth)
+Message: Unable to locate pipeline for heliumemr/heliumhealth
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/extract_pipeline.rb:39:in `call'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/services/gitlab_ci/REDACTED.rb:45:in `block (3 levels) in pipelines_from_client'
+/usr/local/bundle/gems/actions_importer-1.3.19320/lib/valet/models/thread_collection.rb:8:in `block in perform_later'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:24:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `block in synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/synchronization/mutex_lockable_object.rb:48:in `synchronize'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/safe_task_executor.rb:22:in `execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/ivar.rb:170:in `safe_execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/future.rb:55:in `block in execute'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:352:in `run_task'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:343:in `block (3 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `loop'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:334:in `block (2 levels) in create_worker'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `catch'
+/usr/local/bundle/gems/concurrent-ruby-1.2.2/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:333:in `block in create_worker'
+I, [2023-06-06T19:49:51.917856 #1]  INFO -- response: Status 403
+W, [2023-06-06T19:49:51.921147 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T19:49:51.923849 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Funiverse/pipeline_schedules
+I, [2023-06-06T19:49:52.612287 #1]  INFO -- response: Status 200
+D, [2023-06-06T19:49:52.641405 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:52.643622 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:52.644908 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:52.649848 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.652446 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.656254 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.657122 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.657738 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.658947 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.659685 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.660435 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.661056 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.661749 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.662365 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.662982 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.663483 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.664268 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.664882 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.665493 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.666141 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.666641 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.667300 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.668202 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.668696 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.669299 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.669803 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.670640 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.671210 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.671699 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.672255 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.672752 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.673290 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.673769 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.674212 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.674871 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.675305 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.675747 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.676305 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.676784 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.677194 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.677690 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.678514 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.678949 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.813271 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:52.813992 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:52.814461 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:52.814962 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.815361 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.815732 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.816049 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.816385 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.816771 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.817213 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.817541 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.817938 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.818382 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.818751 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.819110 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.819380 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.842698 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:52.843298 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:52.843639 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:52.844300 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.844690 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.845128 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.845468 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.845852 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.846142 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.846481 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.846847 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.847218 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.847575 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.847961 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.848322 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.848634 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.848930 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.849289 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.849989 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.850339 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.850729 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.851183 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.851567 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.851971 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.852315 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.852683 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.853053 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.853438 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.853785 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.854171 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.854484 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.854870 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.855222 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:52.858103 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.858450 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.858809 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.859308 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.859680 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.860019 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.860331 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.860613 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.861020 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.861371 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.861715 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.862031 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.862331 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.862642 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.862985 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.863328 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.863637 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.864003 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.864332 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.864841 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.865440 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.865712 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.866015 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.866266 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.866573 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.866883 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.867252 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.867594 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.867951 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.868496 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.868841 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.869163 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.869495 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.869783 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.870103 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.870380 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.870718 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.871054 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.871358 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.871688 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.871998 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.872310 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.872642 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.872973 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.873292 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.873637 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.873927 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.874238 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:52.875713 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.876059 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.876417 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.876790 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.877126 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.877448 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.877762 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.878112 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.878705 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.879020 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.879339 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.879670 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.880055 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.880349 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.880686 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.880986 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.881300 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.881685 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.881997 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.882343 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.882684 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.883023 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.883404 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.883712 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.884045 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.884345 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.884667 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:52.885028 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:52.885322 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:52.885651 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:52.886027 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:52.886372 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.111625 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.112292 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.112729 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.113383 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.113812 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.114260 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.114633 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.114987 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.115376 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.115776 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.116089 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.116443 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.117182 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.117506 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.117822 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.118263 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.118622 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.118958 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.119278 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.119652 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.120032 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.120393 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.120747 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.121104 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.121424 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.121722 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.122111 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.122462 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.124001 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.124323 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.124670 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.125018 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.125382 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.125734 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.126128 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.126407 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.126816 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.127179 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.127498 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.127863 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.128206 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.128577 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.128881 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.129206 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.129532 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.129840 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.130154 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.130751 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.131049 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.131360 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.131653 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.131990 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.132295 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.132626 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.132913 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.133224 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.133500 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.133826 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.134120 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.134434 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.134730 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.135029 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.135320 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.135711 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.136005 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.136349 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.136679 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.137055 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.137413 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.137737 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.138048 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.138325 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.138590 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.138895 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.139233 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.139546 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.139885 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.140227 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.140526 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.140911 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.141221 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.141495 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.141824 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.142438 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.142707 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.144187 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.144523 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.144874 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.145199 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.145521 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.145845 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.146153 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.146505 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.146843 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.147170 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.147480 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.147779 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.148123 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.148408 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.148720 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.149070 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.149393 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.149707 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.150026 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.150342 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.150676 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.150961 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.151350 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.151656 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.151982 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.152319 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.152605 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.152990 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.153294 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.153610 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.153947 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.154254 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.363924 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.364499 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.365181 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.365759 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.366100 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.366456 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.366905 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.367254 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.367643 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.367969 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.368346 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.370141 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.370500 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.370896 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.371380 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.371715 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.372010 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.372348 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.372747 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.373131 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.373546 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.373901 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.374211 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.374580 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.374856 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.375238 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.375567 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.375902 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.425183 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.425804 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.426090 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.426462 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.426796 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.427065 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.427348 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.427637 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.427947 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.428309 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.428967 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.429257 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.429507 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.429872 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.430472 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.430828 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.454108 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.454687 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.455013 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.455561 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.455923 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.456302 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.456652 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.456989 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.457364 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.457630 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.457975 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.458362 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.458811 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.459159 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.459605 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.459949 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.460342 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.460662 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.461030 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.461411 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.461789 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.462201 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.462558 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.462931 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.463266 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.465005 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.465325 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.465629 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.465962 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.466284 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.466896 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.467203 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.467579 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.468254 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.469974 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.470287 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.470579 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.470900 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.471248 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.471482 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.471746 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.471996 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.552321 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.552998 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.553358 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.553845 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.554224 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.554593 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.554896 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.555291 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.555685 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.556002 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.556319 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.556713 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.558245 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.558580 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.558967 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.559323 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.559621 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.560042 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.560371 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.560732 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.561018 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.563307 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.563640 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.564016 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.564702 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.565096 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.565406 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.565736 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.566035 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.607959 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.608576 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.608872 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.609539 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.609913 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.610313 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.610586 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.610939 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.611326 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.611619 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.611998 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.612389 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.612712 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.613069 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.613456 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.613806 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.614133 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.614440 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.614806 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.615099 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.615424 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.615744 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.616122 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.616453 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.616766 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.617083 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.617439 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.619347 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.619661 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.619975 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.620342 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.620967 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.621279 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.621593 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.621949 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.622276 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.623733 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.624068 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.624423 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.624713 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.625058 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.625374 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.625684 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.626034 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.712762 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.713490 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.713781 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.714263 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.714655 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.715055 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.715433 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.715806 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.716197 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.716594 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.716972 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.717307 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.717657 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.718008 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.718357 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.718694 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.719015 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.719363 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.719753 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.720109 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.720448 #1] DEBUG -- : [Transformers::GitlabCI::Scripts::Artifacts]: Failed to locate transformer for 'artifacts.junit'
+D, [2023-06-06T19:49:53.722083 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'coverage'
+D, [2023-06-06T19:49:53.722532 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.723164 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.723491 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.723912 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.724271 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.724583 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.724914 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.725265 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.725646 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.726039 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.726326 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.726653 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.726989 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.727331 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.727691 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.728002 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.728388 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.730198 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.730562 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.730950 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.731259 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.731619 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.731953 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.732300 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.732663 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.733003 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.733361 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.733720 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.734106 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.734453 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.734780 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.735088 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.735401 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.735698 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.736036 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.737464 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.737778 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.738124 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.738440 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.738756 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.739102 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.739423 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.739673 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.739945 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.740253 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.740515 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.740778 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.741104 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.741437 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.741739 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.742050 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.742344 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.742665 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.831535 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.832134 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.832510 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.833087 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.833490 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.833870 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.834198 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.834518 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.834847 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.835207 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.835554 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.835939 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.836285 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.836662 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.838281 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.838627 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.838985 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.839278 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.839883 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.840178 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.840444 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.840733 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.841027 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.841312 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.841676 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.843203 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.843534 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.843865 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.844243 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.844579 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.844910 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.845305 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.845665 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.846007 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.846388 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.846765 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.848493 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.848783 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.849191 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.849511 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.850566 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.850892 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.851245 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.851569 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.851904 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.852197 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.852516 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.910863 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.911716 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.912051 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.912578 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.912893 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.913299 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.914023 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.914348 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.914800 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.915221 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.915528 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.915804 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.916154 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.916482 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.916763 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.917151 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:53.917468 #1] DEBUG -- : [Transformers::GitlabCI::Scripts::Artifacts]: Failed to locate transformer for 'artifacts.junit'
+D, [2023-06-06T19:49:53.917877 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'coverage'
+D, [2023-06-06T19:49:53.918276 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.918610 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.918929 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.919230 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.919575 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.919909 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.920325 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.920698 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.921024 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.921407 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.921703 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.922043 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.922436 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.922747 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.923115 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.923412 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.923758 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.924223 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.924630 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:53.924930 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.925251 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.925629 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.995242 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T19:49:53.996322 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T19:49:53.996719 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T19:49:53.997261 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:53.997575 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:53.997879 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.998238 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.998522 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.998929 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:53.999260 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:53.999939 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:54.000301 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:54.000644 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.000944 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.001257 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.001596 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.001906 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.002241 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.002555 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:54.002955 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:54.003334 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:54.003614 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.003980 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.004430 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.004751 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.005066 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.005484 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:54.005845 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:54.006175 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.006478 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.006828 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.007150 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.007491 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.007865 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:54.008214 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:54.008548 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:54.008936 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.009510 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.009830 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.010103 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.010425 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.010705 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T19:49:54.011041 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T19:49:54.011431 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T19:49:54.011714 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T19:49:54.011993 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T19:49:54.012309 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T19:49:54.012596 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+I, [2023-06-06T19:49:54.075352 #1]  INFO -- : Output file(s):
+I, [2023-06-06T19:49:54.081561 #1]  INFO -- :   output/heliumemr/staging-gitops/error.txt
+I, [2023-06-06T19:49:54.084550 #1]  INFO -- :   output/heliumemr/staging-gitops/config.json
+I, [2023-06-06T19:49:54.086281 #1]  INFO -- :   output/heliumemr/staging-gitops/source.yml
+I, [2023-06-06T19:49:54.092004 #1]  INFO -- :   output/heliumemr/lasser2/error.txt
+I, [2023-06-06T19:49:54.095634 #1]  INFO -- :   output/heliumemr/file-exporter/error.txt
+I, [2023-06-06T19:49:54.121803 #1]  INFO -- :   output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+I, [2023-06-06T19:49:54.123906 #1]  INFO -- :   output/heliumemr/consolidated-heliumhealth-web/config.json
+I, [2023-06-06T19:49:54.125756 #1]  INFO -- :   output/heliumemr/consolidated-heliumhealth-web/source.yml
+I, [2023-06-06T19:49:54.135709 #1]  INFO -- :   output/heliumemr/emr-3-0/.github/workflows/emr-3-0.yml
+I, [2023-06-06T19:49:54.137712 #1]  INFO -- :   output/heliumemr/emr-3-0/config.json
+I, [2023-06-06T19:49:54.139481 #1]  INFO -- :   output/heliumemr/emr-3-0/source.yml
+I, [2023-06-06T19:49:54.175163 #1]  INFO -- :   output/heliumemr/consolidated-emr-api/.github/workflows/consolidated-emr-api.yml
+I, [2023-06-06T19:49:54.177046 #1]  INFO -- :   output/heliumemr/consolidated-emr-api/config.json
+I, [2023-06-06T19:49:54.179720 #1]  INFO -- :   output/heliumemr/consolidated-emr-api/source.yml
+I, [2023-06-06T19:49:54.208147 #1]  INFO -- :   output/heliumemr/api/.github/workflows/api.yml
+I, [2023-06-06T19:49:54.209929 #1]  INFO -- :   output/heliumemr/api/config.json
+I, [2023-06-06T19:49:54.211863 #1]  INFO -- :   output/heliumemr/api/source.yml
+I, [2023-06-06T19:49:54.221691 #1]  INFO -- :   output/heliumemr/admin_api/.github/workflows/admin_api.yml
+I, [2023-06-06T19:49:54.223436 #1]  INFO -- :   output/heliumemr/admin_api/config.json
+I, [2023-06-06T19:49:54.225167 #1]  INFO -- :   output/heliumemr/admin_api/source.yml
+I, [2023-06-06T19:49:54.228670 #1]  INFO -- :   output/heliumemr/onemedical-ops/error.txt
+I, [2023-06-06T19:49:54.230396 #1]  INFO -- :   output/heliumemr/onemedical-ops/config.json
+I, [2023-06-06T19:49:54.234440 #1]  INFO -- :   output/heliumemr/REDACTEDops/error.txt
+I, [2023-06-06T19:49:54.236866 #1]  INFO -- :   output/heliumemr/REDACTEDops/config.json
+I, [2023-06-06T19:49:54.246093 #1]  INFO -- :   output/heliumemr/admin-mega/.github/workflows/admin-mega.yml
+I, [2023-06-06T19:49:54.247751 #1]  INFO -- :   output/heliumemr/admin-mega/config.json
+I, [2023-06-06T19:49:54.249547 #1]  INFO -- :   output/heliumemr/admin-mega/source.yml
+I, [2023-06-06T19:49:54.252546 #1]  INFO -- :   output/heliumemr/admin/error.txt
+I, [2023-06-06T19:49:54.254540 #1]  INFO -- :   output/heliumemr/admin/config.json
+I, [2023-06-06T19:49:54.273882 #1]  INFO -- :   output/heliumemr/patients-portal-web/.github/workflows/patients-portal-web.yml
+I, [2023-06-06T19:49:54.275556 #1]  INFO -- :   output/heliumemr/patients-portal-web/config.json
+I, [2023-06-06T19:49:54.277513 #1]  INFO -- :   output/heliumemr/patients-portal-web/source.yml
+I, [2023-06-06T19:49:54.280629 #1]  INFO -- :   output/heliumemr/tv-queues/error.txt
+I, [2023-06-06T19:49:54.304723 #1]  INFO -- :   output/heliumemr/pdf-generator/.github/workflows/pdf-generator.yml
+I, [2023-06-06T19:49:54.306734 #1]  INFO -- :   output/heliumemr/pdf-generator/config.json
+I, [2023-06-06T19:49:54.308719 #1]  INFO -- :   output/heliumemr/pdf-generator/source.yml
+I, [2023-06-06T19:49:54.312204 #1]  INFO -- :   output/heliumemr/appointments-backend/error.txt
+I, [2023-06-06T19:49:54.326559 #1]  INFO -- :   output/heliumemr/claimREDACTED/.github/workflows/claimREDACTED.yml
+I, [2023-06-06T19:49:54.328482 #1]  INFO -- :   output/heliumemr/claimREDACTED/config.json
+I, [2023-06-06T19:49:54.330201 #1]  INFO -- :   output/heliumemr/claimREDACTED/source.yml
+I, [2023-06-06T19:49:54.342173 #1]  INFO -- :   output/heliumemr/helium-android/.github/workflows/helium-android.yml
+I, [2023-06-06T19:49:54.343765 #1]  INFO -- :   output/heliumemr/helium-android/config.json
+I, [2023-06-06T19:49:54.345607 #1]  INFO -- :   output/heliumemr/helium-android/source.yml
+I, [2023-06-06T19:49:54.356792 #1]  INFO -- :   output/heliumemr/helium-ios/.github/workflows/helium-ios.yml
+I, [2023-06-06T19:49:54.358644 #1]  INFO -- :   output/heliumemr/helium-ios/config.json
+I, [2023-06-06T19:49:54.360212 #1]  INFO -- :   output/heliumemr/helium-ios/source.yml
+I, [2023-06-06T19:49:54.363362 #1]  INFO -- :   output/heliumemr/fortress/error.txt
+I, [2023-06-06T19:49:54.375025 #1]  INFO -- :   output/heliumemr/claim-submission-tool/.github/workflows/claim-submission-tool.yml
+I, [2023-06-06T19:49:54.376924 #1]  INFO -- :   output/heliumemr/claim-submission-tool/config.json
+I, [2023-06-06T19:49:54.378603 #1]  INFO -- :   output/heliumemr/claim-submission-tool/source.yml
+I, [2023-06-06T19:49:54.381565 #1]  INFO -- :   output/heliumemr/heliumhealth/error.txt
+I, [2023-06-06T19:49:54.383196 #1]  INFO -- :   output/heliumemr/heliumhealth/config.json
+I, [2023-06-06T19:49:54.396892 #1]  INFO -- :   output/heliumemr/universe/.github/workflows/universe.yml
+I, [2023-06-06T19:49:54.398459 #1]  INFO -- :   output/heliumemr/universe/config.json
+I, [2023-06-06T19:49:54.399946 #1]  INFO -- :   output/heliumemr/universe/source.yml
+I, [2023-06-06T19:49:54.402942 #1]  INFO -- :   output/heliumemr/imager/error.txt
+I, [2023-06-06T19:49:55.406547 #1]  INFO -- :   output/workflow_usage.csv
+I, [2023-06-06T19:49:55.500442 #1]  INFO -- :   output/audit_summary.md
+W, [2023-06-06T19:49:59.556766 #1]  WARN -- : Secrets redacted in file(s):
+W, [2023-06-06T19:49:59.557842 #1]  WARN -- :   output/heliumemr/admin/error.txt
+W, [2023-06-06T19:49:59.558352 #1]  WARN -- :   output/heliumemr/appointments-backend/error.txt
+W, [2023-06-06T19:49:59.558755 #1]  WARN -- :   output/heliumemr/claim-submission-tool/config.json
+W, [2023-06-06T19:49:59.559194 #1]  WARN -- :   output/heliumemr/claim-submission-tool-web/config.json
+W, [2023-06-06T19:49:59.559540 #1]  WARN -- :   output/heliumemr/consolidated-heliumhealth-web/.github/workflows/consolidated-heliumhealth-web.yml
+W, [2023-06-06T19:49:59.559917 #1]  WARN -- :   output/heliumemr/file-exporter/error.txt
+W, [2023-06-06T19:49:59.560324 #1]  WARN -- :   output/heliumemr/fortress/error.txt
+W, [2023-06-06T19:49:59.560800 #1]  WARN -- :   output/heliumemr/heliumhealth/error.txt
+W, [2023-06-06T19:49:59.561214 #1]  WARN -- :   output/heliumemr/imager/error.txt
+W, [2023-06-06T19:49:59.561630 #1]  WARN -- :   output/heliumemr/lasser2/error.txt
+W, [2023-06-06T19:49:59.562108 #1]  WARN -- :   output/heliumemr/onemedical-on-premise-ops/config.json
+W, [2023-06-06T19:49:59.563825 #1]  WARN -- :   output/heliumemr/onemedical-on-premise-ops/error.txt
+W, [2023-06-06T19:49:59.564333 #1]  WARN -- :   output/heliumemr/onemedical-ops/error.txt
+W, [2023-06-06T19:49:59.564759 #1]  WARN -- :   output/heliumemr/staging-gitops/error.txt
+W, [2023-06-06T19:49:59.565141 #1]  WARN -- :   output/heliumemr/tv-queues/error.txt
+W, [2023-06-06T19:49:59.565573 #1]  WARN -- :   output/log/valet-20230606-192013.log
+W, [2023-06-06T19:49:59.565997 #1]  WARN -- :   output/log/valet-20230606-192609.log
+W, [2023-06-06T19:49:59.566631 #1]  WARN -- :   output/log/valet-20230606-192732.log
+W, [2023-06-06T19:49:59.566948 #1]  WARN -- :   output/log/valet-20230606-193155.log
+W, [2023-06-06T19:49:59.567379 #1]  WARN -- :   output/log/valet-20230606-194907.log
+I, [2023-06-06T19:49:59.623084 #1]  INFO -- request: GET https://api.github.com/user
+I, [2023-06-06T19:50:00.746678 #1]  INFO -- response: Status 200
+I, [2023-06-06T19:50:00.758331 #1]  INFO -- : Sending telemetry with transaction id '86c50a2b-f9ce-4f76-804b-e4a13a8c0ef2'

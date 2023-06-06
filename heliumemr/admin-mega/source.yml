@@ -1,0 +1,42 @@
+stages:
+  - build
+  - manual-deploy
+  - deploy
+
+build:
+  image: docker:19.03.8
+  stage: build
+  script:
+    - docker version
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/onemedical-admin:${CI_COMMIT_SHORT_SHA}" .
+    - docker tag "1med/onemedical-admin:${CI_COMMIT_SHORT_SHA}" 1med/onemedical-admin:latest
+    - docker push "1med/onemedical-admin:${CI_COMMIT_SHORT_SHA}"
+    - docker push 1med/onemedical-admin:latest
+  tags:
+    - privileged
+
+manual_deploy:
+  image: lwolf/kubectl_deployer:latest
+  stage: manual-deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-admin set image deployment/staging-admin staging-admin="1med/onemedical-admin:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  when: manual
+
+deploy:
+  image: lwolf/kubectl_deployer:latest
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-admin set image deployment/staging-admin staging-admin="1med/onemedical-admin:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  only:
+    - master

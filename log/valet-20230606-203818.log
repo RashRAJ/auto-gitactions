@@ -1,0 +1,64 @@
+# Logfile created on 2023-06-06 20:38:18 +0000 by logger.rb/v1.5.3
+I, [2023-06-06T20:38:18.424900 #1]  INFO -- : Using GitHub Features: Defaults
+I, [2023-06-06T20:38:18.460337 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool-web
+I, [2023-06-06T20:38:19.461490 #1]  INFO -- response: Status 200
+I, [2023-06-06T20:38:19.474473 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool-web
+I, [2023-06-06T20:38:20.275726 #1]  INFO -- response: Status 200
+I, [2023-06-06T20:38:20.281580 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool-web/repository/files/.gitlab-ci.yml?ref=master
+I, [2023-06-06T20:38:21.023350 #1]  INFO -- response: Status 200
+I, [2023-06-06T20:38:21.029755 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool-web/variables
+I, [2023-06-06T20:38:21.758303 #1]  INFO -- response: Status 200
+I, [2023-06-06T20:38:21.763341 #1]  INFO -- request: GET https://gitlab.com/api/v4/groups/heliumemr/variables
+I, [2023-06-06T20:38:22.528813 #1]  INFO -- response: Status 403
+W, [2023-06-06T20:38:22.533315 #1]  WARN -- : Unable to fetch group variables for 'heliumemr'
+I, [2023-06-06T20:38:22.536806 #1]  INFO -- request: GET https://gitlab.com/api/v4/projects/heliumemr%2Fclaim-submission-tool-web/pipeline_schedules
+I, [2023-06-06T20:38:23.347938 #1]  INFO -- response: Status 200
+D, [2023-06-06T20:38:23.393371 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'push'
+D, [2023-06-06T20:38:23.395120 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'merge_request'
+D, [2023-06-06T20:38:23.395916 #1] DEBUG -- : [Transformers::GitlabCI::On]: Located transformer for 'manual'
+D, [2023-06-06T20:38:23.397947 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.399596 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T20:38:23.401615 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.402289 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.402906 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.403765 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.404383 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T20:38:23.405092 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.405620 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.406159 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T20:38:23.406675 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.407245 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.407760 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'cache'
+D, [2023-06-06T20:38:23.408686 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.409113 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.409659 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.410111 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T20:38:23.410599 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.411019 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.411462 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.411872 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.412934 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.413358 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.413787 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T20:38:23.416883 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.417247 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'before_script'
+D, [2023-06-06T20:38:23.417583 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.417936 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.418270 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.418578 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.418877 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.419396 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.419684 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'artifacts'
+D, [2023-06-06T20:38:23.431267 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.432154 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T20:38:23.432708 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.433047 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.433519 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'checkout'
+D, [2023-06-06T20:38:23.433831 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'dependencies'
+D, [2023-06-06T20:38:23.434830 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+D, [2023-06-06T20:38:23.435185 #1] DEBUG -- : [Transformers::GitlabCI::Steps]: Located transformer for 'script'
+I, [2023-06-06T20:38:23.567481 #1]  INFO -- : Output file(s):
+I, [2023-06-06T20:38:23.581910 #1]  INFO -- :   output/heliumemr/claim-submission-tool-web/.github/workflows/claim-submission-tool-web.yml
+I, [2023-06-06T20:38:23.596362 #1]  INFO -- request: GET https://api.github.com/user
+I, [2023-06-06T20:38:24.479924 #1]  INFO -- response: Status 200
+I, [2023-06-06T20:38:24.486939 #1]  INFO -- : Sending telemetry with transaction id 'db64d6a9-a77b-4680-8c1c-bc5cdc05ff69'

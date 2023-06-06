@@ -1,0 +1,104 @@
+image: elixir:1.9.0
+
+stages:
+  - compile
+  - test
+  - build
+  - deploy
+
+variables:
+  POSTGRES_DB: onemedical_test
+  POSTGRES_HOST: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: "postgres"
+
+compile:elixir:
+  stage: compile
+  before_script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+  script:
+    - mix compile
+  tags:
+    - k8s
+
+test:exunit:
+  stage: test
+  services:
+    - postgres:9.6.16
+  before_script:
+    - elixir --version
+    - mix --version
+    - mix do local.hex --force, local.rebar --force
+    - mix deps.get
+    - mkdir -p reports/exunit
+  script:
+    - mix test --cover --color
+  tags:
+    - k8s
+  coverage: '/(\d+\.\d+)%\s*\|\s*Total/'
+  artifacts:
+    reports:
+      junit: reports/exunit/*.xml
+    paths:
+      - cover/
+
+build:docker:
+  image: docker:19.03.8
+  variables:
+    DOCKER_DRIVER: overlay_fs
+  stage: build
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}" .
+    - docker push "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}"
+    - docker image save -o claim-submission-tool-staging.tar "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}"
+  tags:
+    - privileged
+  only:
+    - master
+
+build:manual:
+  image: docker:19.03.8
+  variables:
+    DOCKER_DRIVER: overlay_fs
+  stage: build
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}" .
+    - docker push "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}"
+    - docker image save -o claim-submission-tool-staging.tar "onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}"
+  tags:
+    - privileged
+  except:
+    - tags
+    - master
+  when: manual
+
+deploy:staging:
+  image: lwolf/kubectl_deployer:latest
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config view
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-claim-submission-tool set image deployment/staging-claim-submission-tool staging-claim-submission-tool="onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  only:
+    - master
+
+deploy_manual:staging:
+  image: lwolf/kubectl_deployer:latest
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config view
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-claim-submission-tool set image deployment/staging-claim-submission-tool staging-claim-submission-tool="onemed/claim-submission-tool:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  when: manual

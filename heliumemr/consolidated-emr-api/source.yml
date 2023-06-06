@@ -1,0 +1,251 @@
+stages:
+  - compile
+  - test
+  - generate-version
+  - build
+  - deploy
+  - manual-deploy
+  - notify
+
+cache:
+  untracked: true
+  paths:
+    - ~/.asdf
+    - ~/.mix
+
+variables:
+  PORT: "80"
+  POSTGRES_DB: onemedical_test
+  POSTGRES_HOST: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: "postgres"
+
+
+.elixir: &elixir
+  image: elixir:1.10.4
+  before_script:
+    - elixir --version
+    - mix --version
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+    - mix deps.clean --unused
+  tags:
+    - k8s
+
+# TASKS
+compile:elixir:
+  <<: *elixir
+  stage: compile
+  script:
+    - mix compile --warnings-as-errors
+
+compile:plt:
+  <<: *elixir
+  stage: compile
+  script:
+    - mix dialyzer --plt
+
+## Lint
+# lint:elixir:
+#   <<: *elixir
+#   stage: compile
+#   script:
+#     - mix format --check-formatted
+
+## Test
+test:exunit:
+  <<: *elixir
+  stage: test
+  services:
+    - postgres:9.6.16
+  before_script:
+    - apt-get update
+    - apt-get -y install wkhtmltopdf
+    - apt-get -y install build-essential
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+    - MIX_ENV=test mix ecto.create
+    - MIX_ENV=test mix ecto.migrate
+  script:
+    - mix test --cover --color
+  artifacts:
+    paths:
+      - cover/
+    expire_in: "1 month"
+
+test:migrations:
+  <<: *elixir
+  stage: test
+  services:
+    - postgres:9.6.16
+  before_script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+    - MIX_ENV=test mix ecto.create
+  script:
+    - MIX_ENV=test mix ecto.migrate
+    - MIX_ENV=test mix ecto.rollback --all
+
+# Temporality disable Dredd test until I find why test are failing
+.test:dredd:
+  <<: *elixir
+  stage: test
+  script:
+    - mix test --only dredd --color
+
+test:credo:
+  <<: *elixir
+  stage: test
+  script:
+    - mix credo
+
+test:dialyxir:
+  <<: *elixir
+  stage: test
+  script:
+    - mix dialyzer
+  allow_failure: true
+
+## Generate Version
+generate-version:
+  stage: generate-version
+  script:
+    - echo "Nothing here to see"
+  tags:
+    - k8s
+  only:
+    - tags
+    - master
+    - develop
+    - hotfix-ci
+
+## Build
+build:version:
+  image: docker:19.03.8
+  variables:
+    DOCKER_DRIVER: overlay_fs
+  stage: build
+  before_script:
+    - docker version
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/onemedical:${CI_COMMIT_SHORT_SHA}" .
+    - docker push "1med/onemedical:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - tags
+  tags:
+    - privileged
+
+build:latest:
+  image: docker:19.03.8
+  variables:
+    DOCKER_DRIVER: overlay_fs
+  stage: build
+  before_script:
+    - docker version
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/onemedical:${CI_COMMIT_SHORT_SHA}" .
+    - docker tag "1med/onemedical:${CI_COMMIT_SHORT_SHA}" 1med/onemedical:latest
+    - docker push "1med/onemedical:${CI_COMMIT_SHORT_SHA}"
+    - docker push 1med/onemedical:latest
+    - docker image save -o onemedical-staging.tar "1med/onemedical:${CI_COMMIT_SHORT_SHA}"
+  only:
+    - master
+    - develop
+    - hotfix-ci
+  tags:
+    - privileged
+  artifacts:
+    paths:
+      - onemedical-staging.tar
+    expire_in: "1 week"
+
+build:manual:
+  image: docker:git
+  variables:
+    DOCKER_DRIVER: overlay_fs
+  stage: build
+  script:
+    - docker version
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/onemedical:${CI_COMMIT_SHORT_SHA}" .
+    - docker push "1med/onemedical:${CI_COMMIT_SHORT_SHA}"
+  tags:
+    - privileged
+  except:
+    - tags
+    - master
+    - develop
+    - hotfix-ci
+  when: manual
+
+## Deploy
+
+deploy:
+  image: lwolf/kubectl_deployer:latest
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-api set image deployment/staging-api staging-api="1med/onemedical:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  only:
+    - develop
+
+manual_deploy:staging:
+  image: lwolf/kubectl_deployer:latest
+  stage: manual-deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n staging-api set image deployment/staging-api staging-api="1med/onemedical:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  when: manual
+
+manual_deploy:preprod:
+  image: lwolf/kubectl_deployer:latest
+  stage: manual-deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n onemedical-preprod-api set image deployment/onemedical-preprod-api onemedical-preprod-api="1med/onemedical:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  only:
+    - master
+  when: manual
+
+## Notifications
+
+notify:prod:
+  image: alpine
+  stage: notify
+  before_script:
+    - apk add --update curl
+  script:
+    - 'curl -X POST -H "Content-type: application/json" -d "{\"title\":\"New API version released ${CI_COMMIT_SHORT_SHA}\",\"text\":\"Oh boy!\",\"priority\":\"normal\",\"tags\":[\"environment:prod\",\"project:api\"],\"alert_type\":\"success\"}" "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_TOKEN}"'
+  only:
+    - tags
+  tags:
+    - k8s
+
+notify:staging:
+  image: alpine
+  stage: notify
+  before_script:
+    - apk add --update curl
+  script:
+    - 'curl -X POST -H "Content-type: application/json" -d "{\"title\":\"New API version released ${CI_COMMIT_SHORT_SHA}\",\"text\":\"Oh boy!\",\"priority\":\"normal\",\"tags\":[\"environment:staging\",\"project:api\"],\"alert_type\":\"success\"}" "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_TOKEN}"'
+  only:
+    - master
+  tags:
+    - k8s

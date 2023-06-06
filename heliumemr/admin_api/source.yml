@@ -1,0 +1,85 @@
+image: 'elixir:1.12.3'
+
+stages:
+  - build
+  - check
+  - docker
+variables:
+  POSTGRES_DB_TEST: admin_test
+  POSTGRES_DB_DEV: admin_dev
+  POSTGRES_HOST: "postgres"
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: "postgres"
+
+
+###################################
+############## BUILD ##############
+###################################
+
+compile:
+  stage: build
+  before_script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+  script:
+    - MIX_ENV=test mix compile --warnings-as-errors
+    - mix compile --warnings-as-errors
+  cache:
+    key: admin-main-cache
+    paths:
+      - _build
+      - deps
+  artifacts:
+    paths:
+      - _build
+      - deps
+    expire_in: 1 week
+  tags:
+    - k8s
+
+##################################
+############# CHECK ##############
+##################################
+
+elixir:
+  stage: check
+  services:
+    - postgres:9.6.16
+  before_script:
+    - mix local.hex --force
+    - mix local.rebar --force
+    - mix deps.get
+    - mix ecto.create
+    - mix ecto.migrate
+  script:
+    - mix check --except dialyzer
+  cache:
+    key: admin-main-cache
+    policy: pull
+    paths:
+      - _build
+      - deps
+  dependencies:
+    - compile
+  tags:
+    - k8s
+
+# ##################################
+# ############# DOCKER #############
+# ##################################
+
+docker:version:
+  image: docker:git
+  stage: docker
+  script:
+    - git fetch --prune --unshallow
+    - VERSION=$(git describe --always)
+    - docker version
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --build-arg VERSION=${VERSION} --pull -t "1med/admin:$VERSION" .
+    - docker push "1med/admin:$VERSION"
+  tags:
+    - privileged
+  only: 
+    - master

@@ -1,0 +1,171 @@
+name: heliumemr/claim-submission-tool
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+env:
+  DOCKER_PASSWORD: aPVFiO2W2V0T
+  DOCKER_TLS_CERTDIR: "''"
+  DOCKER_USER: onemed
+jobs:
+  compile-elixir:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.9.0
+    timeout-minutes: 60
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: mix compile
+  test-exunit:
+    needs: compile-elixir
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.9.0
+    timeout-minutes: 60
+    services:
+      postgres:9.6.16:
+        image: postgres:9.6.16
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mkdir -p reports/exunit
+    - run: mix test --cover --color
+#     # 'artifacts.junit' was not transformed because there is no suitable equivalent in GitHub Actions
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        path: cover/
+#     # 'coverage' was not transformed because there is no suitable equivalent in GitHub Actions.
+  build-docker:
+    needs: test-exunit
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:19.03.8
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 60
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DOCKER_DRIVER: overlay_fs
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "onemed/claim-submission-tool:${{ github.sha }}" .
+    - run: docker push "onemed/claim-submission-tool:${{ github.sha }}"
+    - run: docker image save -o claim-submission-tool-staging.tar "onemed/claim-submission-tool:${{ github.sha }}"
+  build-manual:
+    needs: test-exunit
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:19.03.8
+    if: github.event_name == 'workflow_dispatch'
+    timeout-minutes: 60
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DOCKER_DRIVER: overlay_fs
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "onemed/claim-submission-tool:${{ github.sha }}" .
+    - run: docker push "onemed/claim-submission-tool:${{ github.sha }}"
+    - run: docker image save -o claim-submission-tool-staging.tar "onemed/claim-submission-tool:${{ github.sha }}"
+  deploy-staging:
+    needs:
+    - build-docker
+    - build-manual
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.ref == 'refs/heads/master'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config view
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n staging-claim-submission-tool set image deployment/staging-claim-submission-tool staging-claim-submission-tool="onemed/claim-submission-tool:${{ github.sha }}" --record
+  deploy_manual-staging:
+    needs:
+    - build-docker
+    - build-manual
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config view
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n staging-claim-submission-tool set image deployment/staging-claim-submission-tool staging-claim-submission-tool="onemed/claim-submission-tool:${{ github.sha }}" --record

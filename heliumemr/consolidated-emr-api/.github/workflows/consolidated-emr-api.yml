@@ -1,0 +1,513 @@
+name: heliumemr/consolidated-emr-api
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  compile-elixir:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: elixir --version
+    - run: mix --version
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: mix deps.clean --unused
+    - run: mix compile --warnings-as-errors
+  compile-plt:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: elixir --version
+    - run: mix --version
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: mix deps.clean --unused
+    - run: mix dialyzer --plt
+  test-exunit:
+    needs:
+    - compile-elixir
+    - compile-plt
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    services:
+      postgres:9.6.16:
+        image: postgres:9.6.16
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: apt-get update
+    - run: apt-get -y install wkhtmltopdf
+    - run: apt-get -y install build-essential
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: MIX_ENV=test mix ecto.create
+    - run: MIX_ENV=test mix ecto.migrate
+    - run: mix test --cover --color
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 30
+        path: cover/
+  test-migrations:
+    needs:
+    - compile-elixir
+    - compile-plt
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    services:
+      postgres:9.6.16:
+        image: postgres:9.6.16
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: MIX_ENV=test mix ecto.create
+    - run: MIX_ENV=test mix ecto.migrate
+    - run: MIX_ENV=test mix ecto.rollback --all
+  test-credo:
+    needs:
+    - compile-elixir
+    - compile-plt
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: elixir --version
+    - run: mix --version
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: mix deps.clean --unused
+    - run: mix credo
+  test-dialyxir:
+    needs:
+    - compile-elixir
+    - compile-plt
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: elixir:1.10.4
+    timeout-minutes: 60
+    continue-on-error: true
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - run: elixir --version
+    - run: mix --version
+    - run: mix local.hex --force
+    - run: mix local.rebar --force
+    - run: mix deps.get
+    - run: mix deps.clean --unused
+    - run: mix dialyzer
+  generate-version:
+    needs:
+    - test-exunit
+    - test-migrations
+    - test-credo
+    - test-dialyxir
+    runs-on:
+      - self-hosted
+      - k8s
+    if: (startsWith(github.ref, 'refs/tags') || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/hotfix-ci')
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: echo "Nothing here to see"
+  build-version:
+    needs: generate-version
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:19.03.8
+    if: startsWith(github.ref, 'refs/tags')
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DOCKER_DRIVER: overlay_fs
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/onemedical:${{ github.sha }}" .
+    - run: docker push "1med/onemedical:${{ github.sha }}"
+  build-latest:
+    needs: generate-version
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:19.03.8
+    if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/develop' || github.ref == 'refs/heads/hotfix-ci')
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DOCKER_DRIVER: overlay_fs
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/onemedical:${{ github.sha }}" .
+    - run: docker tag "1med/onemedical:${{ github.sha }}" 1med/onemedical:latest
+    - run: docker push "1med/onemedical:${{ github.sha }}"
+    - run: docker push 1med/onemedical:latest
+    - run: docker image save -o onemedical-staging.tar "1med/onemedical:${{ github.sha }}"
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        retention-days: 7
+        path: onemedical-staging.tar
+  build-manual:
+    needs: generate-version
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:git
+    if: github.event_name == 'workflow_dispatch'
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      DOCKER_DRIVER: overlay_fs
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/onemedical:${{ github.sha }}" .
+    - run: docker push "1med/onemedical:${{ github.sha }}"
+  deploy:
+    needs:
+    - build-version
+    - build-latest
+    - build-manual
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.ref == 'refs/heads/develop'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n staging-api set image deployment/staging-api staging-api="1med/onemedical:${{ github.sha }}" --record
+  manual_deploy-staging:
+    needs: deploy
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n staging-api set image deployment/staging-api staging-api="1med/onemedical:${{ github.sha }}" --record
+  manual_deploy-preprod:
+    needs: deploy
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n onemedical-preprod-api set image deployment/onemedical-preprod-api onemedical-preprod-api="1med/onemedical:${{ github.sha }}" --record
+  notify-prod:
+    needs:
+    - manual_deploy-staging
+    - manual_deploy-preprod
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: alpine
+    if: startsWith(github.ref, 'refs/tags')
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: apk add --update curl
+    - run: 'curl -X POST -H "Content-type: application/json" -d "{\"title\":\"New API version released ${{ github.sha }}\",\"text\":\"Oh boy!\",\"priority\":\"normal\",\"tags\":[\"environment:prod\",\"project:api\"],\"alert_type\":\"success\"}" "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_TOKEN}"'
+  notify-staging:
+    needs:
+    - manual_deploy-staging
+    - manual_deploy-preprod
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: alpine
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 60
+    env:
+      PORT: '80'
+      POSTGRES_DB: onemedical_test
+      POSTGRES_HOST: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          ~/.asdf
+          ~/.mix
+        key: default
+    - uses: actions/download-artifact@v3.0.1
+    - run: apk add --update curl
+    - run: 'curl -X POST -H "Content-type: application/json" -d "{\"title\":\"New API version released ${{ github.sha }}\",\"text\":\"Oh boy!\",\"priority\":\"normal\",\"tags\":[\"environment:staging\",\"project:api\"],\"alert_type\":\"success\"}" "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_TOKEN}"'

@@ -1,0 +1,128 @@
+stages:
+  - setup
+  - check
+  - build
+  - deploy
+#  (for now, until new sign in flow is done)
+#  - integration-check
+
+variables:
+  NODE_OPTIONS: --max_old_space_size=4096
+  npm_config_cache: '$CI_PROJECT_DIR/.npm'
+  CYPRESS_CACHE_FOLDER: '$CI_PROJECT_DIR/cache/Cypress'
+
+.node: &node_common
+  image: node:13.8
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+      - .npm
+      - cache/Cypress
+    policy: pull-push
+  tags:
+    - k8s
+
+install-dependencies:
+  <<: *node_common
+  stage: setup
+  script:
+    - node --version
+    - yarn --version
+    - yarn install
+
+test:
+  <<: *node_common
+  stage: check
+  script:
+    - yarn install
+    - yarn test
+
+lint:
+  <<: *node_common
+  stage: check
+  script:
+    - yarn install
+    - yarn lint:vue
+
+#integration_test:
+#  image: cypress/browsers:node13.8.0-chrome81-ff75
+#  stage: integration-check
+#  cache:
+#    key: ${CI_COMMIT_REF_SLUG}
+#    paths:
+#      - node_modules
+#      - .npm
+#      - cache/Cypress
+#    policy: pull-push
+#  script:
+#    - yarn install
+#    - yarn init:vars:env
+#    - yarn start-server-and-test serve:silent http-get://localhost:4000 test:cypress:silent
+#  rules:
+#    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+#      when: always
+#    - when: never
+#  tags:
+#    - k8s
+
+.build-common:
+  image: docker:latest
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - docker version
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}" .
+    - docker tag "1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}" 1med/patient-portal-web:latest
+    - docker push "1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}"
+    - docker push 1med/patient-portal-web:latest
+    - docker image save -o patient-portal-web.tar "1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}"
+  artifacts:
+    paths:
+      - patient-portal-web.tar
+    expire_in: '1 week'
+  tags:
+    - privileged
+
+build:manual:
+  extends: .build-common
+  except:
+    - master
+  allow_failure: true
+  when: manual
+
+build:auto:
+  extends: .build-common
+  only:
+    - master
+
+deploy:manual:
+  image: lwolf/kubectl_deployer:latest
+  except:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context gitlab-deploy
+    - kubectl -n patient-portal-web-stg set image deployment patient-portal-web-stg patient-portal-web-stg="1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  allow_failure: true
+  when: manual
+
+deploy:auto:
+  image: lwolf/kubectl_deployer:latest
+  only:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context gitlab-deploy
+    - kubectl -n patient-portal-web-stg set image deployment patient-portal-web-stg patient-portal-web-stg="1med/patient-portal-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s

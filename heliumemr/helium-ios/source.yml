@@ -1,0 +1,73 @@
+before_script:
+  - export LANG=en_US.UTF-8
+  - python tools/download.py --token $AUTO_CLOSE_TOKEN --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgNn9ypEKDA
+  - source .keys/.env-ci
+  - source .keys/.keys-ci
+
+  - make restore-cache
+  - make bootstrap-ci
+  - make install-firebase-cli
+
+stages:
+  - test
+  - deploy
+
+.tag-job: &tag-job
+  tags:
+    - vm-xcode11.3.1
+
+test:unit:
+  <<: *tag-job
+  stage: test
+  script:
+    - bundle exec fastlane ios test --env testing
+    - make store-cache
+  artifacts:
+      when: always
+      expire_in: 7 days
+      paths:
+        - output/scan
+        - coverage/
+        - .scan-logs/*.log
+        - helium-snapshot-tests/FailureDiffs/
+
+deploy:helium_production_testflight:
+  <<: *tag-job
+  stage: deploy
+  script:
+    - bundle exec fastlane ios release_testflight_helium --env production_helium
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - .gym-build/*.log
+  only:
+    - /^release_production-.*$/
+
+deploy:au_production_firebase:
+  <<: *tag-job
+  stage: deploy
+  script:
+    - bundle exec fastlane ios release_firebase_appunite --env production_appunite
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - .gym-build/*.log
+  only:
+    - /^release_production-.*$/
+
+deploy:au_staging_firebase:
+  <<: *tag-job
+  stage: deploy
+  script:
+    - bundle exec fastlane ios release_firebase_appunite --env staging_appunite
+  artifacts:
+    when: always
+    expire_in: 7 days
+    paths:
+      - .gym-build/*.log
+  only:
+    - /^release_staging-.*$/
+    - develop
+

@@ -1,0 +1,172 @@
+name: heliumemr/universe
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+env:
+  DOCKER_PASSWORD: aPVFiO2W2V0T
+  DOCKER_TLS_CERTDIR: "''"
+  DOCKER_USER: onemed
+jobs:
+  compile:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: appunite/elixir-ci:1.7.1
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: test
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mix compile
+  test-exunit:
+    needs: compile
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: appunite/elixir-ci:1.7.1
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: test
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mix ecto.create
+    - run: mix test --cover --color
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        path: cover/
+  test-credo:
+    needs: compile
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: appunite/elixir-ci:1.7.1
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: test
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mix credo
+  test-dialyxir:
+    needs: compile
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: appunite/elixir-ci:1.7.1
+    if: github.ref == 'refs/heads/manual'
+    timeout-minutes: 60
+    continue-on-error: true
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: test
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mix dialyzer
+  build-staging:
+    needs:
+    - test-exunit
+    - test-credo
+    - test-dialyxir
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: appunite/elixir-ci:1.7.1
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: prod
+      APP_NAME: universe
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+    - run: elixir --version
+    - run: mix --version
+    - run: mix do local.hex --force, local.rebar --force
+    - run: mix deps.get
+    - run: mix release --env=prod
+    - run: cp "_build/$MIX_ENV/rel/$APP_NAME/releases/$(git describe --always)/$APP_NAME.tar.gz" universe.tar.gz
+    - uses: actions/upload-artifact@v3.1.1
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        path: universe.tar.gz
+  deploy-staging:
+    needs: build-staging
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: garland/aws-cli-docker:latest
+    if: github.ref == 'refs/heads/master'
+    environment: staging
+    timeout-minutes: 60
+    services:
+      postgres:
+        image: postgres
+    env:
+      MIX_ENV: test
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 50
+        lfs: true
+    - uses: actions/download-artifact@v3.0.1
+      with:
+        name: build:staging
+    - run: 'true'
+    - run: aws s3 cp universe.tar.gz $AWS_S3_LOCATION

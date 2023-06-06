@@ -1,0 +1,120 @@
+stages:
+  - setup
+  - check
+  - build
+  - deploy
+
+variables:
+  NODE_OPTIONS: --max_old_space_size=4096
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+  CYPRESS_CACHE_FOLDER: "$CI_PROJECT_DIR/cache/Cypress"
+
+.node: &node_common
+  image: node:13.8
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+      - .npm
+      - cache/Cypress
+    policy: pull-push
+  tags:
+    - k8s
+
+setup:dependencies:
+  <<: *node_common
+  stage: setup
+  script:
+    - node --version
+    - yarn --version
+    - yarn install
+
+check:test:
+  <<: *node_common
+  stage: check
+  script:
+    - yarn test
+
+check:lint:
+  <<: *node_common
+  stage: check
+  script:
+    - yarn lint:vue
+
+check:integration:
+  image: cypress/browsers:node13.8.0-chrome81-ff75
+  stage: check
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules
+      - .npm
+      - cache/Cypress
+    policy: pull-push
+  script:
+    - yarn install
+    - yarn start-server-and-test serve:silent http-get://localhost:4000 test:cypress:silent
+  tags:
+    - k8s
+
+.build-common:
+  image: docker:latest
+  stage: build
+  variables:
+    DOCKER_DRIVER: overlay2
+  before_script:
+    - docker version
+  script:
+    - docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - docker build --pull -t "1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}" .
+    - docker tag "1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}" 1med/claim-submission-tool-web:latest
+    - docker push "1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}"
+    - docker push 1med/claim-submission-tool-web:latest
+    - docker image save -o claim-submission-tool-web.tar "1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}"
+  artifacts:
+    paths:
+      - claim-submission-tool-web.tar
+    expire_in: '1 week'
+  tags:
+    - privileged
+
+build:manual:
+  extends: .build-common
+  except:
+    - master
+  allow_failure: true
+  when: manual
+
+build:auto:
+  extends: .build-common
+  only:
+    - master
+
+deploy:manual:
+  image: lwolf/kubectl_deployer:latest
+  except:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n claim-submission-tool-web-stg set image deployment claim-submission-tool-web-stg claim-submission-tool-web-stg="1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+  allow_failure: true
+  when: manual
+
+deploy:auto:
+  image: lwolf/kubectl_deployer:latest
+  only:
+    - master
+  stage: deploy
+  environment:
+    name: staging
+  script:
+    - kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - kubectl -n claim-submission-tool-web-stg set image deployment claim-submission-tool-web-stg claim-submission-tool-web-stg="1med/claim-submission-tool-web:${CI_COMMIT_SHORT_SHA}" --record
+  tags:
+    - k8s
+

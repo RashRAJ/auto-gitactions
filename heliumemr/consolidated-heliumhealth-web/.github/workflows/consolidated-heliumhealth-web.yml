@@ -1,0 +1,277 @@
+name: heliumemr/consolidated-heliumhealth-web
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+env:
+  DOCKER_PASSWORD: aPVFiO2W2V0T
+  DOCKER_USER: onemed
+  GCP_PROJECT_ID: heliumhealth
+  GCP_SERVICE_KEY: |-
+    {
+      "type": "service_account",
+      "project_id": "heliumhealth",
+      "private_key_id": "7c2815430e2ba77fcdba2e8850e4e4ee7e572410",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDL6vJw7s1eVvgi\nESITweMJIAkAzji38tkN65R/gPXdku+YqODXFuYFNc7P2BRZxavZ2Gu1EJP4sH/r\nR7PkWjVRh16m+a9Uf65BMUwEIkjHaXC08WuvV9IDkmOgt4ugUe9IFhtB46ugIjfQ\nPDG3oyV0luLSMQXjpj4HpZNBxkt7K/u3tZBPQgCYztqD6cdyA8mUq3HfweJbI4sr\nYkGsojALYx5YGHe8SvhgA1t08xMQhZ+HCnTf/F4mNC92w1OOdLTLIgE44Ex1cD3Z\ncy33YxObgtDyp/GGTHr8AatXN9KI4FiDt5dA1RGBDO0nULVJSFLzOabYwu3fq7xh\nVnia+xFnAgMBAAECggEAE7FP0notWRP7CIcxDEloHIR8ehhwP8tzDLYYdCvHEqvS\n+aItfHgYpJ4qp8XNSVIeo34UALtmHtkksVsOU1om1gXFrUhllzpxYJhbJ/cLoj5b\nhQ3fgWJwxKmJd4biNAxVmFeSME3FUESdsT1u67YUsuqzYusbD34JdYGW8/4rYeyU\nTxrnpT6SDWbizXpfA+l74syvAtvr9Om40plByPTpRoWqJPWlercnylpaOkcKuQF3\nkltF7fBRWl3462KEtw0qTf1s7F7W93MzsMrJ4fK2lnTuQAjDsWWaYsMDZ4HAWPuR\nSbzIuRMY5StLwQ102Ydz7U2ls+HNLHiUdSUAoySlUQKBgQDrg+9A3vwhCvq8lU3X\nsHCHWmxQdQZ4B/Cbk8zORa2hqqKNQwmXb7TXwJ9im/RRQobuQG11DmHfCvCE8uM8\ntnhI4Z8tPeHtpTVDbqE3fTv1dt0nq2LsscUi2aeNchC066HgpRODisYAOgjMgkR6\nczXYuHu/iY1YPYM42+WP64SjfwKBgQDdp3MJVbrWxxtCCb5B779bIen0AvGAsygG\ng3pA9DbsUqNV9h+QUUC4PozsUtDZBTMhkZIwGyEZG4jIBzwv28CqE1iQCOrmoOYH\nuaKmpFtvzWDUUTgqzhXam2YfkqvqLJkFoVFXOc7BVwaty/NwT12c3QoRedzBwIE4\ngACXdV3mGQKBgE3WgRCTogjZtBz3y45pxgc2H25H/ydUmHUS2DGkXcp8ttSxP05J\noR9djk/s80aYEjhUGtkBM9+fofaOwAOk2wRbbVxqg20jmQL8YVQRk+uAqX8e6ccI\nyfrGrNXWySbCafHxHQ3wo5gXlijhNPizcyx5bIzVTV3IlsIIC0sRr/jJAoGBAM10\nKBov/+aTWf3FYDhoDPxhHCVVERvVdLVM62YHuF0nYEUOxUUVO6NMP33Sacmvmyxz\nbYjvrKdEMW4P3scRr602D3I7AdlSrMXeWRiT4jloqmdC/YgXzIP8ZRXA8181hYWF\neQscBzyI+SThlj21IzWCYZG/XlOtp1mCtImvfaEJAoGAMEJ1SR95Yq9KauYwVtd7\nmeeFIgD6vm7rTGEpMl0zXBCitw+G0Q7Q3xNvyop40Ed9CludjStm3UNShOiOlKxU\nTHV6Au7rCkA0t1dib3gcO2+zcja1QUSQZlYejES5pwvsWN6ObUl3P1mEIQ1TkVOK\nLxXk9sv1OtI/FSROcYZScPk=\n-----END PRIVATE KEY-----\n",
+      "client_email": "REDACTED",
+      "client_id": "110187354682522563906",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/docker-build%40heliumhealth.iam.gserviceaccount.com"
+    }
+jobs:
+  dependencies-compile:
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:11.13
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: node --version
+    - run: yarn --version
+    - run: yarn install
+  quality-lint:
+    needs: dependencies-compile
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:11.13
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: yarn install
+    - run: yarn lint:vue
+  tests-unit:
+    needs: quality-lint
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: node:11.13
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: yarn install
+    - run: yarn test
+  tests-integration:
+    needs: quality-lint
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: cypress/browsers:node11.13.0-chrome73
+    if: github.event_name == 'workflow_dispatch'
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/cache@v3.3.1
+      with:
+        path: |-
+          node_modules
+          .npm
+          cache/Cypress
+        key: "${{ github.ref }}"
+    - run: yarn install
+    - run: yarn init:vars
+    - run: yarn start-server-and-test start:dev:silent http-get://localhost:3000 test:cypress:silent
+  build-manual:
+    needs:
+    - tests-unit
+    - tests-integration
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:latest
+    if: github.event_name == 'workflow_dispatch'
+    timeout-minutes: 60
+    continue-on-error: true
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+      DOCKER_DRIVER: overlay2
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/consolidated-heliumhealth-web:${{ github.sha }}" .
+    - run: docker push "1med/consolidated-heliumhealth-web:${{ github.sha }}"
+  build-auto:
+    needs:
+    - tests-unit
+    - tests-integration
+    runs-on:
+      - self-hosted
+      - privileged
+    container:
+      image: docker:latest
+    if: github.ref == 'refs/heads/master'
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+      DOCKER_DRIVER: overlay2
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: docker version
+    - run: docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
+    - run: docker build --pull -t "1med/consolidated-heliumhealth-web:${{ github.sha }}" .
+    - run: docker push "1med/consolidated-heliumhealth-web:${{ github.sha }}"
+  deploy-staging-manual:
+    needs:
+    - build-manual
+    - build-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    continue-on-error: true
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n consolidated-heliumhealth-web-stg set image deployment consolidated-heliumhealth-web-stg consolidated-heliumhealth-web-stg="1med/consolidated-heliumhealth-web:${{ github.sha }}" --record
+  deploy-staging-auto:
+    needs:
+    - build-manual
+    - build-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.ref == 'refs/heads/master'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n consolidated-heliumhealth-web-stg set image deployment consolidated-heliumhealth-web-stg consolidated-heliumhealth-web-stg="1med/consolidated-heliumhealth-web:${{ github.sha }}" --record
+  aks-deploy-staging-auto:
+    needs:
+    - deploy-staging-manual
+    - deploy-staging-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.ref == 'refs/heads/master'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: kubectl config use-context heliumemr/emr-3-0:aks-agent
+    - run: kubectl -n consolidated-emr-staging set image deployment consolidated-emr-staging consolidated-emr-staging="1med/consolidated-heliumhealth-web:${{ github.sha }}" --record
+  deploy-preprod-manual:
+    needs: aks-deploy-staging-auto
+    runs-on:
+      - self-hosted
+      - k8s
+    container:
+      image: lwolf/kubectl_deployer:latest
+    if: github.event_name == 'workflow_dispatch'
+    environment:
+      name: staging
+    timeout-minutes: 60
+    env:
+      NODE_OPTIONS: "--max_old_space_size=4096"
+      npm_config_cache: "${{ github.workspace }}/.npm"
+      CYPRESS_CACHE_FOLDER: "${{ github.workspace }}/cache/Cypress"
+    steps:
+    - uses: actions/checkout@v3.5.0
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: kubectl config use-context heliumemr/emr-3-0:1med-agent
+    - run: kubectl -n consolidated-heliumhealth-web-preprod set image deployment consolidated-heliumhealth-web-preprod consolidated-heliumhealth-web-preprod="onemed/consolidated-heliumhealth_web:${{ github.sha }}" --record

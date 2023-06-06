@@ -1,0 +1,166 @@
+before_script:
+
+  # download keys to sign the application
+  - python tools/download.py --token ${AUTO_CLOSE_TOKEN} --key-version agxzfmF1dG8tY2xvc2VyGAsSC1Byb2plY3RLZXlzGICAgOXxjMYKDA
+
+  # setup variables
+  - export VERSION_CODE="$(git rev-list HEAD --count)"
+  - export COMMIT_ID="$(git rev-parse --short HEAD)$(git status | grep 'clean' --quiet)"
+  - export TAG_VERSION_NAME="$([[ "${CI_COMMIT_TAG}" =~ ^([0-9]+\.)*[0-9]+$ ]] && echo "$CI_COMMIT_TAG")"
+  - export VERSION_NAME="$(if [[ "$TAG_VERSION_NAME" ]]; then echo "$TAG_VERSION_NAME-$VERSION_CODE"; else echo "$(git rev-parse --short HEAD)-$VERSION_CODE"; fi)"
+
+  # client build will start when adding tag v*.*.*
+  - export FOR_CLIENT="$([[ "${CI_COMMIT_TAG}" =~ ^([0-9]+\.)*[0-9]+$ ]] && echo "TRUE")"
+
+  # define important branches for releases
+  - export FOR_TESTERS="$([[ "${CI_COMMIT_REF_NAME}" == "master" || "${CI_COMMIT_REF_NAME}" == "develop" || "${CI_COMMIT_REF_NAME}" =~ ^release-([0-9]+\.)*[0-9]+$ ]] || [ "${FOR_CLIENT}" ] && echo "TRUE")"
+
+  # setup gradle properties
+  - printf "com.appunite.buildOnCI=true\ncom.appunite.forTesters=${FOR_TESTERS}\ncom.appunite.forClient=${FOR_CLIENT}\norg.gradle.daemon=false\norg.gradle.parallel=true\norg.gradle.caching=true\nversionName=${VERSION_NAME}\nversionCode=${VERSION_CODE}\nautoCloseToken=${AUTO_CLOSE_TOKEN}\nandroid.useAndroidX=true\nandroid.enableJetifier=true\n" > gradle.properties
+
+  - echo -e "Building version $VERSION_NAME \nCommit $COMMIT_ID\nRun by $GITLAB_USER_NAME"
+
+  # setup android sdk and licenses
+  - mkdir -p "${ANDROID_HOME}/licenses"
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55\nd56f5187479451eabf01fb78af6dfcb131a6481e\n24333f8a63b6825ea9c5514f83c2829b004d1fee" > "${ANDROID_HOME}/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+  - echo -e "\nd975f751698a77b662f1254ddbeed3901e976f5a" > "${ANDROID_HOME}/licenses/intel-android-extra-license"
+
+stages:
+  - build
+
+build:
+  stage: build
+
+  image: jacekmarchwicki/android:ubuntu-16-04-java7-8
+
+  script:
+    - ./gradlew --stacktrace --profile ktlintCheck build signingReport
+
+  coverage: '/^Coverage:\s(\d+\.\d+%)/'
+
+  cache:
+    key: helium_v2
+    paths:
+      - .gradle/
+      - .android/
+
+  variables:
+    GRADLE_USER_HOME: ${CI_PROJECT_DIR}/.gradle
+    ANDROID_HOME: ${CI_PROJECT_DIR}/.android
+
+  tags:
+    - k8s
+
+  except:
+    - master
+    - develop
+    - tags
+    - /^release-.*$/
+
+  artifacts:
+    when: always
+    paths:
+    - app/build/reports/
+    - app/build/outputs/
+    - app/build/test-results/
+    expire_in: 2 days
+    reports:
+      junit: app/build/test-results/**/TEST-*.xml
+
+
+testers:
+  stage: build
+
+  image: jacekmarchwicki/android:ubuntu-16-04-java7-8
+
+  script:
+    - ./gradlew --stacktrace --profile ktlintCheck build bundle signingReport appDistributionUploadClientProduction appDistributionUploadClientStaging
+
+  cache:
+    key: helium_v2
+    paths:
+      - .gradle/
+      - .android/
+
+  variables:
+    GRADLE_USER_HOME: ${CI_PROJECT_DIR}/.gradle
+    ANDROID_HOME: ${CI_PROJECT_DIR}/.android
+
+  tags:
+    - k8s
+
+  artifacts:
+    when: always
+    paths:
+    - app/build/reports/
+    - app/build/outputs/
+    expire_in: 2 days
+
+  only:
+    - master
+    - develop
+    - /^release-.*$/
+
+  except:
+    - tags
+
+client:
+  stage: build
+
+  image: jacekmarchwicki/android:ubuntu-16-04-java7-8
+
+  script:
+    - ./gradlew --stacktrace --profile ktlintCheck build bundle signingReport appDistributionUploadClientProduction appDistributionUploadClientStaging
+    - python tools/upload.py --base-url "https://builds.appunite.com/" --token ${AUTO_CLOSE_TOKEN} --build-name "${VERSION_NAME}" --auto-close --final app/build/outputs/ app/build/reports/
+
+  cache:
+    key: helium_v2
+    paths:
+      - .gradle/
+      - .android/
+
+  variables:
+    GRADLE_USER_HOME: ${CI_PROJECT_DIR}/.gradle
+    ANDROID_HOME: ${CI_PROJECT_DIR}/.android
+
+  tags:
+    - k8s
+
+  artifacts:
+    when: always
+    paths:
+    - app/build/reports/
+    - app/build/outputs/
+    expire_in: 2 days
+
+  only:
+    - tags
+
+instrumentedTest:
+  stage: build
+
+  image: jacekmarchwicki/android:ubuntu-16-04-java7-8
+
+  script:
+    - printf "com.appunite.forClient=false\ncom.appunite.forTesters=false\ncom.appunite.buildOnCI=false\n" >> gradle.properties
+    - cat gradle.properties
+    - ./gradlew --stacktrace firebaseTestLabExecuteDevDebugInstrumentation
+
+  cache:
+    key: helium_v2
+    paths:
+      - .gradle/
+      - .android/
+
+  variables:
+    GRADLE_USER_HOME: ${CI_PROJECT_DIR}/.gradle
+    ANDROID_HOME: ${CI_PROJECT_DIR}/.android
+
+  tags:
+    - k8s
+
+  except:
+    - tags
+    - master
+    - develop
